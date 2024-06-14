@@ -2,7 +2,6 @@ package mapping.mapper;
 
 import domain.Vehicle;
 import mapping.dtos.VehicleDto;
-
 import java.util.List;
 import java.util.stream.Collectors;
 

@@ -6,8 +6,10 @@ import org.springframework.stereotype.Service;
 import repository.ReservationRepository;
 import service.ReservationService;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author <a href="https://github.com/EliptikWu"
@@ -67,6 +69,42 @@ public class ReservationServiceImpl implements ReservationService {
     @Override
     public Optional<Reservation> getReservationById(Long id){
         return reservationRepository.findById(id);
+    }
+
+    /**
+     * Retrieves a list of reservations associated with a specific user.
+     * @param user the username or identifier of the user.
+     * @return a list of Reservation objects associated with the user.
+     */
+    @Override
+    public List<Reservation> getReservationsByUser(String user) {
+        return reservationRepository.findAll().stream()
+                .filter(reservation -> reservation.getUser().equals(user))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Retrieves a list of reservations that start at a specific date and time.
+     * @param date the date and time at which the reservations start.
+     * @return a list of Reservation objects that start at the specified date and time.
+     */
+    @Override
+    public List<Reservation> getReservationsByDateInit(LocalDateTime date) {
+        return reservationRepository.findAll().stream()
+                .filter(reservation -> reservation.getReservationInit().equals(reservation))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Retrieves a list of reservations that end at a specific date and time.
+     * @param date the date and time at which the reservations end.
+     * @return a list of Reservation objects that end at the specified date and time.
+     */
+    @Override
+    public List<Reservation> getReservationsByDateFinal(LocalDateTime date) {
+        return reservationRepository.findAll().stream()
+                .filter(reservation -> reservation.getReservationFinal().equals(reservation))
+                .collect(Collectors.toList());
     }
 }
 

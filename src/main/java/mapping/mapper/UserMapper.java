@@ -2,7 +2,6 @@ package mapping.mapper;
 
 import domain.User;
 import mapping.dtos.UserDto;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
