@@ -9,10 +9,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface VehicleRepository extends JpaRepository<Vehicle, Long> {
-    List<Vehicle> listVehicle();
+    List<VehicleDto> listVehicle();
     void removeVehicle(Long id);
-    void addVehicle(Vehicle vehicle);
-    Optional<Vehicle>  getVehicleById(Long id);
-    void saveVehicle(Vehicle vehicle);
+    void addVehicle(VehicleDto vehicle);
+    Optional<VehicleDto>  getVehicleById(Long id);
+    void saveVehicle(VehicleDto vehicle);
 }
 

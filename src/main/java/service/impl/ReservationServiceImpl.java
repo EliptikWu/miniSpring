@@ -1,6 +1,6 @@
 package service.impl;
 
-import domain.Reservation;
+import mapping.dtos.ReservationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.ReservationRepository;
@@ -23,10 +23,10 @@ public class ReservationServiceImpl implements ReservationService {
     /**
      * Retrieves a list of reservations from the reservation repository.
      *
-     * @return a list of Reservation objects.
+     * @return a list of ReservationDto objects.
      */
     @Override
-    public List<Reservation> getReservations(){
+    public List<ReservationDto> getReservations(){
         return reservationRepository.listReservation();
     }
 
@@ -43,10 +43,10 @@ public class ReservationServiceImpl implements ReservationService {
     /**
      * Adds a new reservation to the reservation repository.
      *
-     * @param reservation the Reservation object to be added.
+     * @param reservation the ReservationDto object to be added.
      */
     @Override
-    public void addReservation(Reservation reservation){
+    public void addReservation(ReservationDto reservation){
         reservationRepository.addReservation(reservation);
     }
 
@@ -57,53 +57,57 @@ public class ReservationServiceImpl implements ReservationService {
      * @param reservation the Reservation object to be saved.
      */
     @Override
-    public void saveReservation(Reservation reservation){
-        reservationRepository.save(reservation);
+    public void saveReservation(ReservationDto reservation){
+        reservationRepository.saveReservation(reservation);
     }
 
     /**
      * Retrieves a reservation from the reservation repository based on the provided reservation ID.
+     *
      * @param id the ID of the reservation to be retrieved.
-     * @return an Optional containing the Reservation object if found, or an empty Optional if not found.
+     * @return an Optional containing the ReservationDto object if found, or an empty Optional if not found.
      */
     @Override
-    public Optional<Reservation> getReservationById(Long id){
-        return reservationRepository.findById(id);
+    public Optional<ReservationDto> getReservationById(Long id){
+        return reservationRepository.getReservationById(id);
     }
 
     /**
      * Retrieves a list of reservations associated with a specific user.
+     *
      * @param user the username or identifier of the user.
-     * @return a list of Reservation objects associated with the user.
+     * @return a list of ReservationDto objects associated with the user.
      */
     @Override
-    public List<Reservation> getReservationsByUser(String user) {
-        return reservationRepository.findAll().stream()
-                .filter(reservation -> reservation.getUser().equals(user))
+    public List<ReservationDto> getReservationsByUser(String user) {
+        return reservationRepository.getReservationsByUser().stream()
+                .filter(reservation -> reservation.user().equals(user))
                 .collect(Collectors.toList());
     }
 
     /**
      * Retrieves a list of reservations that start at a specific date and time.
+     *
      * @param date the date and time at which the reservations start.
-     * @return a list of Reservation objects that start at the specified date and time.
+     * @return a list of ReservationDto objects that start at the specified date and time.
      */
     @Override
-    public List<Reservation> getReservationsByDateInit(LocalDateTime date) {
-        return reservationRepository.findAll().stream()
-                .filter(reservation -> reservation.getReservationInit().equals(reservation))
+    public List<ReservationDto> getReservationsByDateInit(LocalDateTime date) {
+        return reservationRepository.getReservationsByDateInit().stream()
+                .filter(reservation -> reservation.reservationInit().equals(reservation))
                 .collect(Collectors.toList());
     }
 
     /**
      * Retrieves a list of reservations that end at a specific date and time.
+     *
      * @param date the date and time at which the reservations end.
-     * @return a list of Reservation objects that end at the specified date and time.
+     * @return a list of ReservationDto objects that end at the specified date and time.
      */
     @Override
-    public List<Reservation> getReservationsByDateFinal(LocalDateTime date) {
-        return reservationRepository.findAll().stream()
-                .filter(reservation -> reservation.getReservationFinal().equals(reservation))
+    public List<ReservationDto> getReservationsByDateFinal(LocalDateTime date) {
+        return reservationRepository.getReservationsByDateFinal().stream()
+                .filter(reservation -> reservation.reservationFinal().equals(reservation))
                 .collect(Collectors.toList());
     }
 }

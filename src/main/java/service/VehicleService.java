@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface VehicleService {
-        List<Vehicle> getVehicle();
+        List<VehicleDto> getVehicle();
         void removeVehicle(Long id);
-        void addVehicle(Vehicle vehicle);
-        Optional<Vehicle> getVehicleById(Long id);
-        void saveVehicle(Vehicle vehicle);
+        void addVehicle(VehicleDto vehicle);
+        Optional<VehicleDto> getVehicleById(Long id);
+        void saveVehicle(VehicleDto vehicle);
 }
 

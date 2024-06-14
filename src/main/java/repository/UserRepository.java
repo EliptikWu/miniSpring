@@ -8,10 +8,10 @@ import java.util.List;
 import java.util.Optional;
 
 public interface UserRepository extends JpaRepository<User, Long> {
-    List<User> listUser();
+    List<UserDto> listUser();
     void removeUser(Long id);
-    void addUser(User user);
-    Optional<User> getUserById(Long id);
-    void saveUser(User user);
+    void addUser(UserDto user);
+    Optional<UserDto> getUserById(Long id);
+    void saveUser(UserDto user);
 }
 

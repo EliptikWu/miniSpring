@@ -2,6 +2,7 @@ package controllers;
 
 import domain.Reservation;
 import domain.Vehicle;
+import mapping.dtos.ReservationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import service.ReservationService;
@@ -17,7 +18,7 @@ public class ReservationController {
     private ReservationService reservationService;
 
     @GetMapping(value = "/get-reservations")
-    public List<Reservation> getAllReservation() {
+    public List<ReservationDto> getAllReservation() {
         return reservationService.getReservations();
     }
 
@@ -27,7 +28,7 @@ public class ReservationController {
     }
 
     @PostMapping(value = "/add-reservation")
-    public void addReservation(@RequestBody Reservation reservation) {
+    public void addReservation(@RequestBody ReservationDto reservation) {
         reservationService.addReservation(reservation);
     }
 }

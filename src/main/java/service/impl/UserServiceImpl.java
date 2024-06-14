@@ -23,10 +23,10 @@ public class UserServiceImpl implements UserService {
     /**
      * Retrieves a list of users from the user repository.
      *
-     * @return a list of User objects.
+     * @return a list of UserDto objects.
      */
     @Override
-    public List<User> getUsers(){
+    public List<UserDto> getUsers(){
         return userRepository.listUser();
     }
 
@@ -43,10 +43,10 @@ public class UserServiceImpl implements UserService {
     /**
      * Adds a new user to the user repository.
      *
-     * @param user the User object to be added.
+     * @param user the UserDto object to be added.
      */
     @Override
-    public void addUser(User user){
+    public void addUser(UserDto user){
         userRepository.addUser(user);
     }
 
@@ -54,20 +54,20 @@ public class UserServiceImpl implements UserService {
      * Saves the provided user to the user repository.
      * If the user already exists, it will be updated; otherwise, a new user will be added.
      *
-     * @param user the User object to be saved.
+     * @param user the UserDto object to be saved.
      */
     @Override
-    public void saveUser(User user){
-        userRepository.save(user);
+    public void saveUser(UserDto user){
+        userRepository.saveUser(user);
     }
 
     /**
      * Retrieves a user from the user repository based on the provided user ID.
      * @param id the ID of the user to be retrieved.
-     * @return an Optional containing the User object if found, or an empty Optional if not found.
+     * @return an Optional containing the UserDto object if found, or an empty Optional if not found.
      */
     @Override
-    public Optional<User> getUserById(Long id){
-        return userRepository.findById(id);
+    public Optional<UserDto> getUserById(Long id){
+        return userRepository.getUserById(id);
     }
 }

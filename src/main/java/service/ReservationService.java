@@ -1,6 +1,7 @@
 package service;
 
 import domain.Reservation;
+import mapping.dtos.ReservationDto;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -8,12 +9,12 @@ import java.util.Optional;
 
 public interface ReservationService {
 
-        List<Reservation> getReservations();
+        List<ReservationDto> getReservations();
         void removeReservation(Long id);
-        void addReservation(Reservation reservation);
-        Optional<Reservation> getReservationById(Long id);
-        void saveReservation(Reservation reservation);
-        List<Reservation> getReservationsByUser(String user);
-        List<Reservation> getReservationsByDateInit(LocalDateTime date);
-        List<Reservation> getReservationsByDateFinal(LocalDateTime date);
+        void addReservation(ReservationDto reservation);
+        Optional<ReservationDto> getReservationById(Long id);
+        void saveReservation(ReservationDto reservation);
+        List<ReservationDto> getReservationsByUser(String user);
+        List<ReservationDto> getReservationsByDateInit(LocalDateTime date);
+        List<ReservationDto> getReservationsByDateFinal(LocalDateTime date);
 }

@@ -1,7 +1,7 @@
 package controllers;
 
-import domain.User;
 import domain.Vehicle;
+import mapping.dtos.VehicleDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import service.VehicleService;
@@ -16,7 +16,7 @@ public class VehicleController {
     private VehicleService vehicleService;
 
     @GetMapping(value = "/get-vehicles")
-    public List<Vehicle> getAllVehicles() {
+    public List<VehicleDto> getAllVehicles() {
         return vehicleService.getVehicle();
     }
 
@@ -26,7 +26,7 @@ public class VehicleController {
     }
 
     @PostMapping(value = "/add-vehicle")
-    public void addVehicle(@RequestBody Vehicle vehicle) {
+    public void addVehicle(@RequestBody VehicleDto vehicle) {
         vehicleService.addVehicle(vehicle);
     }
 }

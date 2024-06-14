@@ -1,14 +1,15 @@
 package service;
 
 import domain.Payment;
+import mapping.dtos.PaymentDto;
 
 import java.util.List;
 import java.util.Optional;
 
 public interface PaymentService{
-    List<Payment> getPayments();
+    List<PaymentDto> getPayments();
     void removePayment(Long id);
-    void addPayment(Payment payment);
-    Optional<Payment> getPaymentById(Long id);
-    void savePayment(Payment payment);
+    void addPayment(PaymentDto payment);
+    Optional<PaymentDto> getPaymentById(Long id);
+    void savePayment(PaymentDto payment);
 }
