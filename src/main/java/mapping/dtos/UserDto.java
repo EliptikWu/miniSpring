@@ -11,9 +11,15 @@ public record UserDto(Long idUser,
                         @NotNull(message = "no puede ser null")
                         @NotBlank
                         @NotEmpty
-                        String userName,
+                        String name,
                         @Email(message = "Email no valido")
                         String email,
                         @NotNull
-                        String telephone) {
+                        String telephone,
+                        @NotBlank
+                        @NotNull
+                        String username,
+                        @NotBlank
+                        @NotNull
+                        String password) {
 }

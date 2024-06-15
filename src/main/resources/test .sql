@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-06-2024 a las 03:56:16
+-- Tiempo de generación: 15-06-2024 a las 08:09:33
 -- Versión del servidor: 10.4.32-MariaDB
 -- Versión de PHP: 8.2.12
 
@@ -28,28 +28,47 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `payment` (
-  `idPayment` int(25) NOT NULL,
-  `idVehicle` int(25) NOT NULL,
-  `idReservation` int(25) NOT NULL,
-  `idUser` int(25) NOT NULL
+  `idPayment` int(11) NOT NULL,
+  `idVehicle` int(11) NOT NULL,
+  `idReservation` int(11) DEFAULT NULL,
+  `idUser` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `payment`
+--
+
+INSERT INTO `payment` (`idPayment`, `idVehicle`, `idReservation`, `idUser`) VALUES
+(1, 3, 2, 4),
+(2, 1, 1, 3),
+(3, 3, 1, 1),
+(4, 1, 3, 3);
 
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `reservation`
+-- Estructura de tabla para la tabla `reservations`
 --
 
-CREATE TABLE `reservation` (
-  `idReservation` int(25) NOT NULL,
-  `name` int(25) NOT NULL,
-  `price` int(25) NOT NULL,
-  `description` int(25) NOT NULL,
-  `idUser` int(25) NOT NULL,
-  `idVehicle` int(25) NOT NULL,
-  `reservationInit` datetime NOT NULL,
-  `reservationFinal` datetime NOT NULL
+CREATE TABLE `reservations` (
+  `idReservation` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `price` float DEFAULT NULL,
+  `description` varchar(255) DEFAULT NULL,
+  `idUser` int(11) DEFAULT NULL,
+  `idVehicle` int(11) DEFAULT NULL,
+  `reservationInit` datetime DEFAULT NULL,
+  `reservationFinal` datetime DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `reservations`
+--
+
+INSERT INTO `reservations` (`idReservation`, `name`, `price`, `description`, `idUser`, `idVehicle`, `reservationInit`, `reservationFinal`) VALUES
+(1, 'Ejemplo 1', 100.5, 'Descripción del primer registro', 1, 2, '2024-06-15 10:00:00', '2024-06-15 12:00:00'),
+(2, 'Ejemplo 2', 75.25, 'Descripción del segundo registro', 2, 1, '2024-06-15 14:00:00', '2024-06-15 16:00:00'),
+(3, 'Ejemplo 3', 120.75, 'Descripción del tercer registro', 3, 4, '2024-06-15 18:00:00', '2024-06-15 20:00:00');
 
 -- --------------------------------------------------------
 
@@ -108,18 +127,13 @@ INSERT INTO `vehicles` (`idVehicle`, `name`, `available`, `price`, `type`) VALUE
 -- Indices de la tabla `payment`
 --
 ALTER TABLE `payment`
-  ADD PRIMARY KEY (`idPayment`),
-  ADD KEY `FK_Pagos_Reservas` (`idReservation`),
-  ADD KEY `FK_Pagos_Usuarios` (`idUser`),
-  ADD KEY `FK_Pagos_Vehiculos` (`idVehicle`);
+  ADD PRIMARY KEY (`idPayment`);
 
 --
--- Indices de la tabla `reservation`
+-- Indices de la tabla `reservations`
 --
-ALTER TABLE `reservation`
-  ADD PRIMARY KEY (`idReservation`),
-  ADD KEY `FK_Reservas_Usuarios` (`idUser`),
-  ADD KEY `FK_Reservas_Vehiculos` (`idVehicle`);
+ALTER TABLE `reservations`
+  ADD PRIMARY KEY (`idReservation`);
 
 --
 -- Indices de la tabla `users`
@@ -132,35 +146,6 @@ ALTER TABLE `users`
 --
 ALTER TABLE `vehicles`
   ADD PRIMARY KEY (`idVehicle`);
-
---
--- AUTO_INCREMENT de las tablas volcadas
---
-
---
--- AUTO_INCREMENT de la tabla `reservation`
---
-ALTER TABLE `reservation`
-  MODIFY `idReservation` int(25) NOT NULL AUTO_INCREMENT;
-
---
--- Restricciones para tablas volcadas
---
-
---
--- Filtros para la tabla `payment`
---
-ALTER TABLE `payment`
-  ADD CONSTRAINT `FK_Pagos_Reservas` FOREIGN KEY (`idReservation`) REFERENCES `reservation` (`idReservation`),
-  ADD CONSTRAINT `FK_Pagos_Usuarios` FOREIGN KEY (`idUser`) REFERENCES `users` (`idUser`),
-  ADD CONSTRAINT `FK_Pagos_Vehiculos` FOREIGN KEY (`idVehicle`) REFERENCES `vehicles` (`idVehicle`);
-
---
--- Filtros para la tabla `reservation`
---
-ALTER TABLE `reservation`
-  ADD CONSTRAINT `FK_Reservas_Usuarios` FOREIGN KEY (`idUser`) REFERENCES `users` (`idUser`),
-  ADD CONSTRAINT `FK_Reservas_Vehiculos` FOREIGN KEY (`idVehicle`) REFERENCES `vehicles` (`idVehicle`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

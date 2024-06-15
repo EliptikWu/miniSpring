@@ -6,19 +6,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class UserMapper {
+
     public static UserDto mapFrom(User userMapper){
         return new UserDto(userMapper.getIdUser(),
                 userMapper.getName(),
                 userMapper.getEmail(),
-                userMapper.getTelephone()
+                userMapper.getTelephone(),
+                userMapper.getUsername(),
+                userMapper.getPassword()
         );
     }
 
     public static User mapFrom(UserDto userMapper){
         return new User(userMapper.idUser(),
-                userMapper.userName(),
+                userMapper.name(),
                 userMapper.email(),
-                userMapper.telephone()
+                userMapper.telephone(),
+                userMapper.username(),
+                userMapper.password()
                 );
     }
 

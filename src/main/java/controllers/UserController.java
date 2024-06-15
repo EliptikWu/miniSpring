@@ -54,7 +54,7 @@ public class UserController {
         Optional<UserDto> userDto = userService.searchByUser(loginRequest.username());
         if (userDto.isEmpty()) {
             return ResponseEntity.badRequest().body("Login failed");
-        } else if (!Objects.equals(userDto, loginRequest.password())) {
+        } else if (!Objects.equals(userDto.get().password(), loginRequest.password())) {
             return ResponseEntity.badRequest().body("Invalid password");
         }
         return ResponseEntity.ok("Login succesful");
