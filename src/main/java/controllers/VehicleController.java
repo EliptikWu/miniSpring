@@ -1,11 +1,9 @@
 package controllers;
 
-import domain.Vehicle;
 import mapping.dtos.VehicleDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import service.VehicleService;
-
 import java.util.List;
 
 @RestController

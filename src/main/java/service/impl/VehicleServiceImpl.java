@@ -5,10 +5,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.VehicleRepository;
 import service.VehicleService;
-
-
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 /**
  * @author <a href="https://github.com/EliptikWu"
@@ -66,4 +65,44 @@ public class VehicleServiceImpl implements VehicleService {
     public void addVehicle(VehicleDto vehicle){
         vehicleRepository.addVehicle(vehicle);
     }
+
+    /**
+     * Retrieves a list of vehicles from the vehicle repository filtered by the specified category.
+     *
+     * @param type the category type of the vehicles to retrieve.
+     * @return a list of VehicleDto objects that belong to the specified category.
+     */
+    @Override
+    public List<VehicleDto> listVehicleByCategory(String type){
+        return vehicleRepository.listVehicleByCategory().stream()
+                .filter(vehicle -> vehicle.type().equals(type))
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Retrieves a list of vehicles from the vehicle repository filtered by the specified price.
+     *
+     * @param price the price of the vehicles to retrieve.
+     * @return a list of VehicleDto objects that match the specified price.
+     */
+    @Override
+    public List<VehicleDto> listVehicleByPrice(Double price){
+        return vehicleRepository.listVehicleByCategory().stream()
+                .filter(vehicle -> vehicle.type().equals(price))
+                .collect(Collectors.toList());
+    }
+    /**
+     * Retrieves a list of vehicles from the vehicle repository filtered by availability.
+     *
+     * @param available the availability status of the vehicles to retrieve.
+     *                  It should be "true" for available vehicles and "false" for unavailable vehicles.
+     * @return a list of VehicleDto objects that match the specified availability status.
+     */
+    @Override
+    public List<VehicleDto> listVehicleByAvailable(String available){
+        return vehicleRepository.listVehicleByCategory().stream()
+                .filter(vehicle -> vehicle.type().equals(available))
+                .collect(Collectors.toList());
+    }
+
 }

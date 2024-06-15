@@ -1,13 +1,9 @@
 package controllers;
 
-import domain.Reservation;
-import domain.Vehicle;
 import mapping.dtos.ReservationDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import service.ReservationService;
-import service.VehicleService;
-
 import java.util.List;
 
 @RestController

@@ -5,7 +5,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.ReservationRepository;
 import service.ReservationService;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -109,6 +108,17 @@ public class ReservationServiceImpl implements ReservationService {
         return reservationRepository.getReservationsByDateFinal().stream()
                 .filter(reservation -> reservation.reservationFinal().equals(reservation))
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public boolean listVehicleByAvailable(ReservationDto reservation) {
+        List<ReservationDto> reservationA = reservationRepository.findDateProblem(
+                reservation.vehicle(),
+                reservation.reservationInit(),
+                reservation.reservationFinal()
+        );
+
+        return reservationA.isEmpty();
     }
 }
 

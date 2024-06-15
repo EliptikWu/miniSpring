@@ -1,9 +1,10 @@
 package repository;
 
 import domain.Reservation;
+import domain.Vehicle;
 import mapping.dtos.ReservationDto;
 import org.springframework.data.jpa.repository.JpaRepository;
-
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -16,4 +17,5 @@ public interface ReservationRepository extends JpaRepository<Reservation, Long> 
     List<ReservationDto> getReservationsByUser();
     List<ReservationDto> getReservationsByDateInit();
     List<ReservationDto> getReservationsByDateFinal();
+    List<ReservationDto> findDateProblem(Vehicle vehicle, LocalDateTime dateInit, LocalDateTime dateFinal);
 }

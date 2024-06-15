@@ -1,8 +1,6 @@
 package service;
 
-import domain.Payment;
 import mapping.dtos.PaymentDto;
-
 import java.util.List;
 import java.util.Optional;
 

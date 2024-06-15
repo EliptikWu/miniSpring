@@ -11,14 +11,15 @@ public class UserMapper {
                 userMapper.getName(),
                 userMapper.getEmail(),
                 userMapper.getTelephone()
-                );
+        );
     }
 
     public static User mapFrom(UserDto userMapper){
         return new User(userMapper.idUser(),
-                userMapper.name(),
+                userMapper.userName(),
                 userMapper.email(),
-                userMapper.telephone());
+                userMapper.telephone()
+                );
     }
 
     public static List<UserDto> mapFrom(List<User> userMapper){

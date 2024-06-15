@@ -1,8 +1,6 @@
 package service;
 
-import domain.Reservation;
 import mapping.dtos.ReservationDto;
-
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -17,4 +15,5 @@ public interface ReservationService {
         List<ReservationDto> getReservationsByUser(String user);
         List<ReservationDto> getReservationsByDateInit(LocalDateTime date);
         List<ReservationDto> getReservationsByDateFinal(LocalDateTime date);
+        boolean listVehicleByAvailable(ReservationDto reservation);
 }

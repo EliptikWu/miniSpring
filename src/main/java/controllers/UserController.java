@@ -1,12 +1,16 @@
 package controllers;
 
-import domain.User;
+import jakarta.validation.Valid;
+import mapping.dtos.LoginDto;
 import mapping.dtos.UserDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import service.UserService;
-
+import java.sql.SQLException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @RestController
@@ -39,5 +43,20 @@ public class UserController {
     @PostMapping(value = "/save-user")
     public void saveUser(@RequestBody UserDto user){
         userService.saveUser(user);
+    }
+
+    @PostMapping(value = "/login")
+    public ResponseEntity<String> login(@RequestBody @Valid LoginDto loginRequest, BindingResult result) throws SQLException {
+
+        if (result.hasErrors()) {
+            return ResponseEntity.badRequest().body("Invalid login request");
+        }
+        Optional<UserDto> userDto = userService.searchByUser(loginRequest.username());
+        if (userDto.isEmpty()) {
+            return ResponseEntity.badRequest().body("Login failed");
+        } else if (!Objects.equals(userDto, loginRequest.password())) {
+            return ResponseEntity.badRequest().body("Invalid password");
+        }
+        return ResponseEntity.ok("Login succesful");
     }
 }

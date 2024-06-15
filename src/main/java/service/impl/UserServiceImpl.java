@@ -1,14 +1,13 @@
 package service.impl;
 
 import domain.User;
-import domain.Vehicle;
 import mapping.dtos.UserDto;
 import mapping.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import repository.UserRepository;
 import service.UserService;
-
+import java.sql.SQLException;
 import java.util.List;
 import java.util.Optional;
 /**
@@ -44,10 +43,12 @@ public class UserServiceImpl implements UserService {
      * Adds a new user to the user repository.
      *
      * @param user the UserDto object to be added.
+     * @return
      */
     @Override
-    public void addUser(UserDto user){
-        userRepository.addUser(user);
+    public UserDto addUser(UserDto user){
+           userRepository.addUser(user);
+        return user;
     }
 
     /**
@@ -69,5 +70,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<UserDto> getUserById(Long id){
         return userRepository.getUserById(id);
+    }
+
+    @Override
+    public Optional<UserDto> searchByUser(String username) throws SQLException {
+        User user = userRepository.findByUser(username);
+        if (user == null){
+            return Optional.empty();
+        }
+        return Optional.of(UserMapper.mapFrom(user));
     }
 }

@@ -1,8 +1,6 @@
 package service;
 
-import domain.Vehicle;
 import mapping.dtos.VehicleDto;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -12,5 +10,8 @@ public interface VehicleService {
         void addVehicle(VehicleDto vehicle);
         Optional<VehicleDto> getVehicleById(Long id);
         void saveVehicle(VehicleDto vehicle);
+        List<VehicleDto> listVehicleByCategory(String type);
+        List<VehicleDto> listVehicleByPrice(Double price);
+        List<VehicleDto> listVehicleByAvailable(String available);
 }
 
